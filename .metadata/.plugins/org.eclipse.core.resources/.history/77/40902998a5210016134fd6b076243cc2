@@ -1,0 +1,31 @@
+
+<p ng-show="loginForm.username.$error.minlength && loginForm.username.$touched" style="color:maroon" role="alert">Username is too short.</p>
+<p ng-show="loginForm.username.$error.maxlength && loginForm.username.$touched" style="color:maroon" role="alert">Username is too long.</p>
+<p ng-show="loginForm.password.$error.minlength && loginForm.password.$touched" style="color:maroon" role="alert">Password is too short.</p>
+<p ng-show="loginForm.password.$error.maxlength && loginForm.password.$touched" style="color:maroon" role="alert">Password is too long.</p>
+
+<p ng-show="loginForm.username.$error.required && loginForm.username.$touched" style="color:maroon" role="alert">Username is required.</p>
+<p ng-show="loginForm.password.$error.required && loginForm.password.$touched" style="color:maroon" role="alert">Password is required.</p>
+
+<p ng-show="categoryForm.categoryName.$error.required && categoryForm.categoryName.$touched" style="color:maroon" role="alert">Category Name is required.</p>
+<p ng-show="categoryForm.categoryDescription.$error.required && categoryForm.categoryDescription.$touched" style="color:maroon" role="alert">Category Description is required.</p>
+
+<p ng-show="productForm.productName.$error.required && productForm.productName.$touched" style="color:maroon" role="alert">Product Name is required.</p>
+<p ng-show="productForm.productDescription.$error.required && productForm.productDescription.$touched" style="color:maroon" role="alert">Product Description is required.</p>
+<p ng-show="productForm.productPrice.$error.required && productForm.productPrice.$touched" style="color:maroon" role="alert">Product Price is required.</p>
+
+<p ng-show="userForm.username.$error.required && userForm.username.$touched" style="color:maroon" role="alert">User Name is required.</p>
+<p ng-show="userForm.password.$error.required && userForm.password.$touched" style="color:maroon" role="alert">Password is required.</p>
+<p ng-show="userForm.passwordCompare.$touched&&userForm.passwordCompare.$error.required" style="color:maroon" role="alert">Password Compare field is required.</p>
+<p ng-show="userForm.passwordCompare.$error.match">Passwords do not match.</p>
+
+<p ng-show="userForm.email.$error.required && userForm.email.$touched" style="color:maroon" role="alert">Email is required.</p>
+<p ng-show="!userForm.email.$error.required && userForm.email.$error.email && userForm.email.$dirty">invalid email</p>
+<p ng-show="userForm.userRole.$error.required && userForm.userRole.$touched" style="color:maroon" role="alert">User Role is required.</p>
+<p ng-show="userForm.houseNo.$error.required && userForm.houseNo.$touched" style="color:maroon" role="alert">House No is required.</p>
+<p ng-show="userForm.houseNo.$error.number&&userForm.houseNo.$touched" style="color:maroon" role="alert">House No Should be a number.</p>
+<p ng-show="userForm.street.$error.required && userForm.street.$touched" style="color:maroon" role="alert">Street is required.</p>
+<p ng-show="userForm.city.$error.required && userForm.city.$touched" style="color:maroon" role="alert">City is required.</p>
+<p ng-show="userForm.country.$error.required && userForm.country.$touched" style="color:maroon" role="alert">City is required.</p>
+
+

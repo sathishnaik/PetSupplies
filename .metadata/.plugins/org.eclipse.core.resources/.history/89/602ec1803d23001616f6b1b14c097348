@@ -1,0 +1,65 @@
+package com.sogeti.ejb.beans;
+
+import java.util.List;
+
+import com.sogeti.ejb.beans.interfaces.CategoryDAOLocal;
+import com.sogeti.ejb.beans.interfaces.CategoryDAORemote;
+import com.sogeti.pet.entity.User;
+import com.sogeti.pet.entity.Category;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+/**
+ * Session Bean implementation class CategoryDAO
+ */
+@Stateless
+public class CategoryDAO implements CategoryDAORemote, CategoryDAOLocal {
+
+    /**
+     * Default constructor. 
+     */
+    public CategoryDAO() {
+        // TODO Auto-generated constructor stub
+    }
+    
+    @PersistenceContext
+	private EntityManager em;
+	
+	 
+    
+    @Override
+	public Category createCategory(Category category) {
+    	System.out.println("storing category EJB!!!!!!!!!!!!!!!!");
+		em.persist(category);
+		return category;
+	}
+    
+    @Override
+   	public Category updateCategory(Category category) {
+       	System.out.println("storing category EJB!!!!!!!!!!!!!!!!");
+   		em.merge(category);
+   		return category;
+   	}
+    
+    @Override
+   	public void deleteCategory(int id) {
+       	System.out.println("deleting category EJB!!!!!!!!!!!!!!!!");
+   		em.remove(getCategoryById(id));
+   	}
+    
+    @Override
+   	public List<Category> getAllCategories() {
+    	System.out.println("Get ALL category EJB!!!!!!!!!!!!!!!!");
+   		return em.createNamedQuery("Category.getAll", Category.class).getResultList();
+   	}
+    
+    @Override
+   	public Category getCategoryById(int id) {
+    	System.out.println("Get category by d  EJB!!!!!!!!!!!!!!!!");
+   		return em.find(Category.class, id);
+   	}
+    
+}

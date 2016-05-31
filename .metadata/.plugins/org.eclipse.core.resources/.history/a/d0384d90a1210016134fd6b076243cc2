@@ -1,0 +1,101 @@
+<div class="container" >
+		<div class="row" >
+			<div class="col-xs-12" >
+			<div class="alert alert-success" ng-show="status">
+			{{status}}
+			</div>
+			
+			<div >
+			<h3>User Registration</h3>
+			</div>
+<form role="form" novalidate name="userForm" ng-submit="saveUser(user)" class="form-horizontal">
+						<input type="hidden" name="id" ng-model="id"/>
+						<input type="hidden" name="state_id" ng-model="state_id"/>
+						
+						<div class="form-group" >
+							<label class="col-sm-4 control-label">User Name:</label>
+							<div class="col-sm-6">
+							 <input type="text" name="username" ng-model="user.username"  required/></div>
+							 <span ng-show="userForm.username.$error.required && userForm.username.$dirty">required</span>
+						</div>
+						
+						<div class="form-group" >
+							<label class="col-sm-4 control-label" >Password:</label>
+							<div class="col-sm-6">
+							<input type="password" name="password" data-ng-model="user.password"  ng-minlength="3"  ng-maxlength="8" required/>
+							<span class="help-block" data-ng-show="user.password.$error.required">This is required.</span>
+							</div> 
+						</div>
+						
+						<div class="form-group" data-ng-class="{'has-error':!userForm.passwordCompare.$valid}"><label for="passwordCompare" class="col-sm-4 control-label">Confirm Password</label>
+						<div class="col-sm-6">
+ 						<input type="password" name="passwordCompare"  data-ng-model="PasswordCompare" data-ng-match="user.password" required/>
+ 						<span class="help-block" data-ng-show="userForm.passwordCompare.$touched&&userForm.passwordCompare.$error.required">This is required.</span>
+ 						<span class="help-block" data-ng-show="userForm.passwordCompare.$error.match">Passwords do not match.</span></div>
+						</div>
+						
+						<div class="form-group" >
+							<label class="col-sm-4 control-label" >Email:</label>
+							<div class="col-sm-6">
+							<input type="text" name="email" ng-model="user.email"  required/>
+							<span ng-show="userForm.email.$error.required && userForm.email.$dirty">required</span>
+  							 <span ng-show="!userForm.email.$error.required && userForm.email.$error.email && userForm.email.$dirty">invalid email</span>
+							</div> 
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-4 control-label">User Role: </label>
+							<div class="col-sm-6">
+							<select name="singleSelect" id="singleSelect" ng-model="user.userRole">
+						      <option value="">---Please select---</option> <!-- not selected / blank option -->
+						      <option value="USER">USER</option> <!-- interpolation -->
+						      <option value="ADMIN">ADMIN</option>
+						    </select></div>
+						</div>
+						
+						
+						
+						
+						
+						 <div class="help-block" ng-messages="userForm.username.$error" ng-show="userForm.username.$touched|userForm." >
+    						<div class="help-block" ng-messages-include="resources/messages.html"></div>
+						</div>
+						
+						  <div class="form-group">
+            <label path="userAddress.houseNo" class="col-sm-4 control-label">House No</label>
+            <div class="col-sm-6"><input type="number" id="houseNo" name="houseNo" ng-model="user.userAddress.houseNo" /></div>
+            </div>
+            
+            <div class="form-group">
+            <label path="userAddress.street" class="col-sm-4 control-label">Street</label>
+            <div class="col-xs-4"><input id="street" name="street" ng-model="user.userAddress.street" /></div>
+            </div>
+            
+            <div class="form-group">
+            <label path="userAddress.city" class="col-sm-4 control-label">City</label>
+            <div class="col-xs-4"><input id="city" name="city" ng-model="user.userAddress.city" /></div>
+            </div>
+            
+             <div class="form-group">
+            <label path="userAddress.state_id" class="col-sm-4 control-label">State</label>
+            <div class="col-xs-4">
+            <select ng-options="x.stateId as x.stateName for x in states" ng-model="user.userAddress.state_id" >
+			<option value="">---Please select---</option>
+			 </select>
+            </div>
+            </div>
+            
+            <div class="form-group">
+            <label  path="user.userAddress.country" class="col-sm-4 control-label">Country</label>
+            <div class="col-xs-4"><input id="country" name="country" ng-model="user.userAddress.country" /></div>
+            </div>
+						
+						<div class="form-group" ng-if="user.id==undefined">
+							<button class="btn btn-primary"  >Add User</button>
+						</div>
+						<div class="form-group" ng-if="user.id>0">
+							<button class="btn btn-primary"   >Edit User</button>
+						</div>
+						</form>
+
+</div></div></div>

@@ -1,0 +1,20 @@
+<div class="container" >
+		<div class="row" >
+			<div class="col-xs-12" >
+		
+		<div class="row">
+ <p><input type="text" placeholder="Search Category" ng-model="productName" /></p>
+  <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="x in productList | orderBy : 'productName'|filter:productName">
+    <a ng-click="editProduct(x.id)" class="btn" class="thumbnail">
+      <img src="resources/images/{{x.productImagePath}}"" alt="...">
+      <div class="caption">
+        <h4>{{x.productName}}</h4>
+        <p>{{x.productDescription}}</p>
+        </div>
+    </a>
+  </div>
+  
+</div>
+</div></div></div>
+
+

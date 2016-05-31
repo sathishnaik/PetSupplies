@@ -1,0 +1,81 @@
+package com.sogeti.pet.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ORDERDETAIL")
+public class OrderDetail implements Serializable{
+	
+public OrderDetail(){
+		
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3812839544124264883L;
+
+	@Id
+	@Column(name = "ORDER_DETAIL_ID")
+	@GeneratedValue
+	private int orderDetailId;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="ORDER_FK_ID", referencedColumnName="ORDER_ID")
+	private UserOrder order;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="PRODUCT_FK_ID", referencedColumnName="PRODUCT_ID")
+	private Product product;
+
+	public int getOrderDetailId() {
+		return orderDetailId;
+	}
+
+	public void setOrderDetailId(int orderDetailId) {
+		this.orderDetailId = orderDetailId;
+	}
+
+	public UserOrder getOrder() {
+		return order;
+	}
+
+	public void setOrder(UserOrder order) {
+		this.order = order;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
+	@Override
+    public int hashCode() {
+        return getOrder().getOrderNo()+getProduct().getProductName().hashCode();
+    }
+	
+	 @Override
+	    public boolean equals(final Object obj) {
+	        if (this == obj)
+	            return true;
+	        if (!(obj instanceof UserCart))
+	            return false;
+	        return getOrder().getOrderNo() == ((OrderDetail) obj).getOrder().getOrderNo()&&
+	        		getProduct().getProductName() == ((OrderDetail) obj).getProduct().getProductName()&&
+	        		getOrder().getOrderDate().equals(((OrderDetail) obj).getOrder().getOrderDate());
+	    }
+}

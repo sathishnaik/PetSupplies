@@ -1,0 +1,71 @@
+package com.sogeti.pet.rest;
+
+import java.util.List;
+import java.util.Set;
+
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.sogeti.ejb.beans.interfaces.CategoryDAOLocal;
+import com.sogeti.pet.entity.Category;
+import com.sogeti.pet.entity.Product;
+
+@RequestScoped
+@Path("/category")
+public class CategoryEndPoint {
+	
+	@EJB
+	private CategoryDAOLocal categoryDAOLocal;
+	
+	@POST
+	@Consumes({MediaType.APPLICATION_OCTET_STREAM, MediaType.MULTIPART_FORM_DATA, MediaType.APPLICATION_JSON})
+	public Category create(Category category) {
+		if(category.getId()==0){
+		System.out.println("inside category rest controller");
+		return categoryDAOLocal.createCategory(category);
+		}else{
+			return categoryDAOLocal.updateCategory(category);
+		}
+	}
+	
+	@DELETE
+	@Path("/{id:[0-9][0-9]*}")
+	public void delete(@PathParam("id") int id) {
+			categoryDAOLocal.deleteCategory(id);
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Category> getAllCategories() {
+		System.out.println("inside category rest controller get All categories");
+		 List<Category> list = categoryDAOLocal.getAllCategories();
+		return list;
+	}
+	
+	@GET
+	@Path("/{id:[0-9][0-9]*}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Category getCategoryById(@PathParam("id") int id) {
+		System.out.println("inside category rest controller getCategoryById");
+		Category category = categoryDAOLocal.getCategoryById(id);
+		return category;
+	}
+	
+	@GET
+	@Path("/{prodid:[0-9][0-9]*}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Category getCategoryByProductId(@PathParam("prodid") int id) {
+		System.out.println("inside category rest controller getCategoryByProductId");
+		Category category = categoryDAOLocal.getCategoryById(id);
+		return category;
+	}
+
+}

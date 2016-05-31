@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="webadmin">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="webejbmodule.jar" deploy-path="/" handle="module:/resource/webejbmodule/webejbmodule">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="webmodule.war" deploy-path="/" handle="module:/resource/webmodule/webmodule">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="webshopusermodule.war" deploy-path="/" handle="module:/resource/webshopusermodule/webshopusermodule">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="webshopusermodule.war" deploy-path="/" handle="module:/resource/webshopusermodule/webshopusermodule">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>

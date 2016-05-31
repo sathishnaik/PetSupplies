@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Supplies Admin Module</title>
+
+   <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.css">
+<link href="css/simple-sidebar.css" rel="stylesheet"> 
+<link href="css/styles.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.2.3/css/ngDialog.css" />
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.2.3/css/ngDialog-theme-default.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.2.3/css/ngDialog-theme-plain.css">
+
+    <base href="/webmodule/">
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+          <!-- sidebar -->
+            <div  class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar" ng-if="userLoggedIn.username">
+              
+              	<ul class="nav">
+          			<li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+            	</ul>
+               
+                <ul class="sidebar-nav" >
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Web Shop
+                    </a>
+                </li>
+                 <li><a href="#/categories">Home</a></li>
+                 <li><a href="#/categories">Categories</a></li>
+                <li><a href="#/products">Products</a></li>
+                <li><a href="#/users">Users</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="#/logout">Log Out</a></li>
+                </ul>
+              
+            </div>
+            <!-- /sidebar -->
+            
+             <div class="column col-sm-10 col-xs-11" id="main">
+                
+                <!-- top nav -->
+              	<div class="navbar navbar-blue navbar-static-top">  
+                    <div class="navbar-header">
+                     
+                     
+                  	</div>
+                  	<nav class="collapse navbar-collapse" role="navigation">
+                  	<ul class="nav navbar-nav" ng-show="!userLoggedIn.username">
+                      <li class="navbar-brand">
+                        <a href="#">Web Shop Application</a>
+                      </li>
+                     
+                    </ul>
+                   
+                    <ul class="nav navbar-nav" ng-show="userLoggedIn.username">
+                      <li>
+                        <a href="#/categories"><i class="glyphicon glyphicon-home"></i> Home</a>
+                      </li>
+                     <!-- <li>
+                        <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Post</a>
+                      </li>-->
+                       <li>
+                       <a href="#/logout"><span class="badge">Log Out</span></a>
+                      </li> 
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" ng-show="userLoggedIn.username">
+                      <li >
+                       <a href="#/login"><i class="glyphicon glyphicon-user" ></i>Logged In:{{userLoggedIn.username}}</a>
+                        </ul>
+                  	</nav>
+                </div>
+                <!-- /top nav -->
+              
+                <div class="padding">
+                    <div class="full col-sm-9">
+                      
+                        <!-- content -->                      
+                      	<div class="row" ng-view>
+                       </div><!--/row-->
+                      
+                        <div class="row" id="footer">    
+                          <div class="col-sm-6">
+                            
+                          </div>
+                          <div class="col-sm-6">
+                            <p>
+                            <a href="#" class="pull-right">©Copyright 2016</a>
+                            </p>
+                          </div>
+                        </div>
+                      
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+          
+        </div>
+    </div>
+</div>
+
+
+<!-- JQuery ================================================================ -->
+<script src="js/jquery/jquery-2.0.3.js"></script>
+
+<!-- Bootstrap ============================================================= -->
+<script src="js/bootstrap.js"></script>
+
+
+
+<!-- AngularJS ============================================================= -->
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-route.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-messages.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-cookies.js"></script>
+<script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.2.3/js/ngDialog.min.js"></script>
+<script type="text/javascript" src="js/scripts.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<!-- AngularJS App Code ==================================================== -->
+<script src="app.js"></script>
+<script src="resources/login/login.controller.js"></script>
+<script src="resources/login/login.service.js"></script>
+<script src="resources/login/logout.controller.js"></script>
+<script src="resources/category/category.contoller.js"></script>
+<script src="resources/category/categorydetail.controller.js"></script>
+<script src="resources/category/category.service.js"></script>
+<script src="resources/product/product.contoller.js"></script>
+<script src="resources/product/productdetail.controller.js"></script>
+<script src="resources/product/product.service.js"></script>
+
+<script src="resources/user/user.controller.js"></script>
+<script src="resources/user/userdetail.controller.js"></script>
+<script src="resources/user/user.service.js"></script>
+<script src="resources/user/user.directive.js"></script>
+
+<script src="resources/order/order.controller.js"></script>
+<script src="resources/order/orderdetail.controller.js"></script>
+<script src="resources/order/order.service.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+'use strict';
+  
+angular.module('app')
+.factory('OrderService',['$http', function ($http) {
+        var service = {};
+        
+        service.saveOrder = function(order){
+        	 return $http.post(appConfig.serviceURI+"UserOrder",order);
+		}
+        
+        service.saveOrderDetail = function(orderDetail){
+       	 return $http.post(appConfig.serviceURI+"UserOrder/detail",orderDetail);
+		}
+        
+        service.getAllOrdersByUserId = function (callback) {
+        	$http.get(appConfig.serviceURI+"products").success(function(data){
+    			 callback(data);
+    		}).error(function(error){
+    			alert("Some Error Occurred!");
+    		});
+        };
+        
+        
+        return service;
+    }]);
+  

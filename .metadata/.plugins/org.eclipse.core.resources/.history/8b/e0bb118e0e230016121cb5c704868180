@@ -1,0 +1,12 @@
+package com.sogeti.ejb.beans.interfaces;
+
+import javax.ejb.Local;
+
+import com.sogeti.pet.entity.UserOrder;
+
+@Local
+public interface OrderDAOLocal {
+	
+	public UserOrder createUserOrder(UserOrder userOrder);
+
+}

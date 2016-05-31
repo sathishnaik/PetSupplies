@@ -1,0 +1,18 @@
+'use strict';
+  
+angular.module('app')
+.factory('OrderService',['$http', function ($http) {
+        var service = {};
+        
+        service.saveOrder = function(order){
+        	 return $http.post(appConfig.serviceURI+"UserOrder",order);
+		}
+        
+        service.saveOrderDetail = function(orderDetail){
+       	 return $http.post(appConfig.serviceURI+"UserOrder/detail",orderDetail);
+		}
+        
+        
+        return service;
+    }]);
+  

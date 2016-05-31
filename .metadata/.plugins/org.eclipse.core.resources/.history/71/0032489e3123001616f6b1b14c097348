@@ -1,0 +1,22 @@
+(function () {
+    'use strict';
+
+    var angularApp = angular.module("app");
+	
+	angularApp.controller("OrderController",['$location','$scope','$http','ngDialog','ProductService',
+	                     function($location,$scope,$http,ngDialog, ProductService){
+
+		$scope.productList = getAllProducts();
+		
+		$scope.editProduct = function(id){
+			$location.path('/product/'+id);
+			}
+		
+		function getAllProducts(){
+			 ProductService.getAllProducts(function(response) {
+				$scope.productList = response;
+	         });
+			}
+	}]);
+	
+})();

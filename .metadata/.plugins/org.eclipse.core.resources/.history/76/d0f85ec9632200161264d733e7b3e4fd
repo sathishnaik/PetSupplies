@@ -1,0 +1,21 @@
+package com.sogeti.ejb.beans;
+
+import com.sogeti.ejb.beans.interfaces.CartDAOLocal;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+/**
+ * Session Bean implementation class CartDAO
+ */
+@Stateless
+@LocalBean
+public class CartDAO implements CartDAOLocal {
+
+    /**
+     * Default constructor. 
+     */
+    public CartDAO() {
+        // TODO Auto-generated constructor stub
+    }
+
+}

@@ -1,0 +1,23 @@
+<div class="container" >
+		<div class="row" >
+			<div class="col-xs-12" >
+			<h2><span class="label label-info">Categories</span></h2>
+
+<div class="row">
+
+
+     
+  <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="x in categoryList | orderBy : 'categoryName'|filter:categoryName">
+  
+    <a ng-click="editCategory(x.id)" class="btn" class="thumbnail">
+      <img src="resources/images/{{x.categoryImagePath}}"" alt="...">
+      <div class="caption">
+        <h4>{{x.categoryName}}</h4>
+        <p>{{x.categoryDescription}}</p>
+        </div>
+    </a>
+  </div>
+  
+</div>
+</div></div></div>
+

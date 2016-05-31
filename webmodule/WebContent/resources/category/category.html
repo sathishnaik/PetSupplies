@@ -1,0 +1,90 @@
+<div class="container"  >
+		<div class="row"  >
+			<div class="col-xs-12" >
+			<div class="alert alert-success" ng-show="status">
+			{{status}}
+			</div>
+<form role="form" novalidate name="categoryForm" ng-submit="saveCategory(category)" class="form-horizontal" >
+						<input type="hidden" name="id" ng-model="category.id"/>
+
+						<div class="form-group" >
+							<label class="col-sm-4 control-label">Category Name:</label>
+							<div class="col-sm-6">
+							<input type="text" name="categoryName"  data-ng-model="category.categoryName"  required/>
+							</div> 
+						</div>
+						<div class="form-group" >
+							<label class="col-sm-4 control-label">Category Description: </label>
+							<div class="col-sm-6">
+							<input type="text" name="categoryDescription" data-ng-model="category.categoryDescription"  required/>
+							</div> 
+						</div>
+						<div class="form-group" ng-if="category.id==undefined" >
+							<label class="col-sm-4 control-label">Category Image: </label>
+							<div class="col-sm-6">
+						<input onchange="angular.element(this).scope().file_changed(this)" type="file" accept="image/*" />
+						</div>
+             		 </div>
+             		 
+             		 <div class="form-group" ng-if="category.id>0">
+							<label class="col-sm-4 control-label">Change Category Image: </label>
+							<div class="col-sm-6">
+						<input onchange="angular.element(this).scope().file_changed(this)" type="file" accept="image/*"  />
+						<img alt="" src="resources/images/{{category.categoryImagePath}}" height="100" width="200" >
+						</div>
+             		 </div>
+						 <div class="help-block" ng-messages="categoryForm.categoryName.$error" ng-show="categoryForm.categoryName.$touched||categoryForm.categoryDescription.$touched" >
+    						<div class="help-block" ng-messages-include="resources/messages.html"></div>
+						</div>
+						
+						<div class="form-group" ng-if="category.id==undefined">
+							<button class="btn btn-primary"  ng-disabled="categoryForm.$invalid" >Add Category</button>
+						</div>
+						<div class="form-group" ng-if="category.id>0">
+							<button class="btn btn-primary"  ng-disabled="categoryForm.$invalid" >Edit Category</button>
+						</div>
+
+
+<div class="form-group">					
+<table class="table table-striped" >
+<tr>
+<th>Product ID</th>
+<th>Product Name</th>
+<th>Product Description</th>
+<th>Edit/Delete</th>
+</tr>
+   <tr ng-repeat="product in category.products">
+       <td data-title="'Id'" >
+           {{product.id}}
+       </td>
+       <td data-title="'Category Name'" >
+           {{product.productName}}
+       </td>
+       <td data-title="'Category Description'" >
+           {{product.productDescription}}
+       </td>   
+       
+        <td data-title="'Edit/Delete'" >
+       <a ng-click="editProduct(product.id)" class="btn btn-large btn-primary">Edit</a>
+        <button type="button" class="btn btn-small btn-danger"  data-ng-click="openModal(product.id)" >
+  Delete 
+</button> 
+       </td>     
+         
+   </tr>
+</table>
+</div>	
+</form>
+
+</div></div></div>
+
+<script type="text/ng-template" id="modalDialogId">
+        <div class="ngdialog-message">
+            <h3>Delete Product</h3>
+            <p>Are you sure you want to delete Product&hellip; </p>
+        </div>
+        <div class="ngdialog-buttons">
+            <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="deleteProduct(confirmValue);closeThisDialog('button')">Confirm</button>
+            <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog('button')">Cancel</button>
+        </div>
+    </script>

@@ -1,0 +1,35 @@
+<div class="container" >
+		<div class="row" >
+			<div class="col-xs-12" >
+		
+<form role="form" novalidate name="productForm" class="form-horizontal">
+						<input type="hidden" name="id" ng-model="id"/>
+						<input type="hidden" name="cartId" ng-model="cartId"/>
+						
+		<h3>Product:{{product.productName}}</h3>
+		
+						<div class="row">
+  <div class="col-lg-3 col-md-4 col-xs-6 thumb" >
+    <a ng-click="#" class="btn" class="thumbnail">
+      <img src="resources/images/{{product.productImagePath}}" alt="...">
+      <div class="caption">
+        <h4>{{product.productName}}</h4>
+        <p>{{product.productDescription}}</p>
+        <p>Rs: {{product.productPrice}}</p>
+        <p>{{product.productStatus}}</p>
+        </div>
+    </a>
+  </div>
+  <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+  <div class="form-group" >
+  <input type="number" min="0" ng-model="cart.productQuantity">
+   <div>
+   <span> <b>Total:</b> {{cart.productQuantity * product.productPrice | currency:"Rs"}}</span>
+  </div>
+<button class="btn btn-primary" ng-click="addToCart(cart,product)">Add to Cart</button>
+	</div>
+  </div>
+</div>
+						</form>
+
+</div></div></div>

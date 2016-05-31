@@ -1,0 +1,45 @@
+<div class="container" >
+		<div class="row" >
+			<div class="col-xs-12" >
+			<div class="alert alert-success" ng-show="status">
+			{{status}}
+			</div>	
+<a href="#/category" class="btn btn-small btn-success">Add Category</a>
+<table class="table table-striped" >
+<tr>
+<th>Category ID</th>
+<th>Category Name</th>
+<th>Category Description</th>
+<th>Edit/Delete</th>
+</tr>
+   <tr ng-repeat="category in categoryList">
+       <td data-title="'Id'" >
+           {{category.id}}
+       </td>
+       <td data-title="'Category Name'" >
+           {{category.categoryName}}
+       </td>
+       <td data-title="'Category Description'" >
+           {{category.categoryDescription}}
+       </td>    
+       
+       <td data-title="'Edit/Delete'" >
+       <a ng-click="editCategory(category.id)" class="btn btn-large btn-primary">Edit</a>
+        <button type="button" class="btn btn-small btn-danger"  data-ng-click="openModal(category.id)" >
+  Delete</button> 
+       </td>    
+         
+   </tr>
+</table>
+</div></div></div>
+
+<script type="text/ng-template" id="modalDialogId">
+        <div class="ngdialog-message">
+            <h3>Delete Category</h3>
+            <p>Are you sure you want to delete Category&hellip; All products will be deleted too &hellip;</p>
+        </div>
+        <div class="ngdialog-buttons">
+            <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="deleteCategory(confirmValue);closeThisDialog('button')">Confirm</button>
+            <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog('button')">Cancel</button>
+        </div>
+    </script>

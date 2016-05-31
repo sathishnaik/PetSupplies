@@ -1,0 +1,71 @@
+package com.sogeti.pet.rest;
+
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.sogeti.ejb.beans.interfaces.CartDAOLocal;
+import com.sogeti.ejb.beans.interfaces.CartDAOLocal;
+import com.sogeti.pet.entity.Category;
+
+@RequestScoped
+@Path("/cart")
+public class CartEndPoint {
+	
+	@EJB
+	private CartDAOLocal cartDAOLocal;
+	
+	@POST
+	@Consumes({MediaType.APPLICATION_OCTET_STREAM, MediaType.MULTIPART_FORM_DATA, MediaType.APPLICATION_JSON})
+	public Cart create(Category category) {
+		System.out.println("save category :::"+category.getId()+"category.getCategoryImagePath()::"+category.getCategoryImagePath());
+		if(category.getId()==0){
+		System.out.println("inside category rest controller");
+		return CartDAOLocal.createCategory(category);
+		}else{
+			return CartDAOLocal.updateCategory(category);
+		}
+	}
+	
+	@DELETE
+	@Path("/{id:[0-9][0-9]*}")
+	public void delete(@PathParam("id") int id) {
+			CartDAOLocal.deleteCategory(id);
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Category> getAllCategories() {
+		System.out.println("inside category rest controller get All categories");
+		 List<Category> list = CartDAOLocal.getAllCategories();
+		return list;
+	}
+	
+	@GET
+	@Path("/{id:[0-9][0-9]*}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Category getCategoryById(@PathParam("id") int id) {
+		System.out.println("inside category rest controller get All categories");
+		Category category = CartDAOLocal.getCategoryById(id);
+		return category;
+	}
+	
+	@GET
+	@Path("/{prodid:[0-9][0-9]*}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Category getCategoryByProductId(@PathParam("prodid") int id) {
+		System.out.println("inside category rest controller get All categories");
+		Category category = CartDAOLocal.getCategoryById(id);
+		return category;
+	}
+
+}

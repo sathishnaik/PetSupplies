@@ -1,0 +1,73 @@
+package com.sogeti.ejb.beans;
+
+import java.util.List;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import com.sogeti.ejb.beans.interfaces.CartDAOLocal;
+import com.sogeti.ejb.beans.interfaces.OrderDAOLocal;
+import com.sogeti.pet.entity.UserOrder;
+import com.sogeti.pet.entity.UserOrder;
+
+/**
+ * Session Bean implementation class CartDAO
+ */
+@Stateless
+@LocalBean
+public class OrderDAO implements OrderDAOLocal {
+
+    /**
+     * Default constructor. 
+     */
+    public OrderDAO() {
+        // TODO Auto-generated constructor stub
+    }
+    
+    @PersistenceContext
+   	private EntityManager em;
+   	
+   	 
+       
+       @Override
+   	public UserOrder createUserOrder(UserOrder userOrder) {
+       	System.out.println("storing UserOrder EJB!!!!!!!!!!!!!!!!");
+   		em.persist(userOrder);
+   		return userOrder;
+   	}
+       
+       @Override
+      	public UserOrder updateUserOrder(UserOrder userOrder) {
+          	System.out.println("storing UserOrder EJB!!!!!!!!!!!!!!!!");
+      		em.merge(userOrder);
+      		return userOrder;
+      	}
+       
+       @Override
+      	public void deleteUserOrder(int id) {
+          	System.out.println("deleting UserOrder EJB!!!!!!!!!!!!!!!!");
+      		em.remove(getUserOrderById(id));
+      	}
+       
+       @Override
+      	public List<UserOrder> getAllCarts() {
+       	System.out.println("Get ALL UserOrder EJB!!!!!!!!!!!!!!!!");
+      		return em.createNamedQuery("UserOrder.getAll", UserOrder.class).getResultList();
+      	}
+       
+       @Override
+      	public UserOrder getCartById(int id) {
+       	System.out.println("Get UserOrder by d  EJB!!!!!!!!!!!!!!!!");
+      		return em.find(UserOrder.class, id);
+      	}
+       
+       @Override
+     	public List<UserOrder> getCartSByUserId(int userId) {
+      	System.out.println("Get UserOrder by d  EJB!!!!!!!!!!!!!!!!");
+      	return em.createNamedQuery("UserOrder.getAllByUserId", UserOrder.class).setParameter("userId", userId).getResultList();
+     	}
+       
+
+}

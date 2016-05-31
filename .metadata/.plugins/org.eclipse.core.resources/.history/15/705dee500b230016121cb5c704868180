@@ -1,0 +1,12 @@
+package com.sogeti.pet.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ORDERDetail")
+public class OrderDetail implements Serializable{
+
+}

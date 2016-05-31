@@ -1,0 +1,52 @@
+<div class="container" >
+		<div class="row" >
+			<div class="col-xs-12" >
+			
+			<div class="alert alert-success" ng-show="status">
+			{{status}}
+			</div>	
+			
+	<a href="#/user" class="btn btn-small btn-success">Add User</a>		
+<table class="table table-striped" >
+<tr>
+<th>User ID</th>
+<th>User Name</th>
+<th>Email</th>
+<th>User Role</th>
+<th>Edit/Delete</th>
+</tr>
+   <tr ng-repeat="user in userList">
+       <td data-title="'Id'" >
+           {{user.id}}
+       </td>
+       <td data-title="'User Name'" >
+           {{user.username}}
+       </td>
+       <td data-title="'Email'" >
+           {{user.email}}
+       </td>
+        <td data-title="'User Role'" >
+           {{user.userRoles}}
+       </td>   
+       
+        <td data-title="'Edit/Delete'" >
+       <a ng-click="editUser(user.id)" class="btn btn-large btn-primary">Edit</a>
+        <button type="button" class="btn btn-small btn-danger"  data-ng-click="openModal(user.id)" >
+  Delete 
+</button> 
+       </td>     
+         
+   </tr>
+</table>
+</div></div></div>
+
+<script type="text/ng-template" id="modalDialogId">
+        <div class="ngdialog-message">
+            <h3>Delete User</h3>
+            <p>Are you sure you want to delete User&hellip; </p>
+        </div>
+        <div class="ngdialog-buttons">
+            <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="deleteUser(confirmValue);closeThisDialog('button')">Confirm</button>
+            <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog('button')">Cancel</button>
+        </div>
+    </script>

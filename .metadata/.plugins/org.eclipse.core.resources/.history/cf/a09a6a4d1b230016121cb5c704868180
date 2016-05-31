@@ -1,0 +1,89 @@
+package com.sogeti.pet.rest;
+
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.sogeti.ejb.beans.interfaces.CartDAOLocal;
+import com.sogeti.ejb.beans.interfaces.OrderDAOLocal;
+import com.sogeti.pet.entity.OrderDetail;
+import com.sogeti.pet.entity.UserCart;
+import com.sogeti.pet.entity.UserOrder;
+
+@RequestScoped
+@Path("/UserOrder")
+public class OrderEndPoint {
+	
+	@EJB
+	private OrderDAOLocal orderDAOLocal;
+	
+	@POST
+	@Consumes({MediaType.APPLICATION_OCTET_STREAM, MediaType.MULTIPART_FORM_DATA, MediaType.APPLICATION_JSON})
+	public UserOrder create(UserOrder userOrder) {
+		System.out.println("save UserCart :::"+userOrder.getOrderId());
+		if(userOrder.getOrderId()==0){
+		System.out.println("inside UserCart rest controller");
+		return orderDAOLocal.createUserOrder(userOrder);
+		}else{
+			return orderDAOLocal.updateUserOrder(userOrder);
+		}
+	}
+	
+	@POST
+	@Consumes({MediaType.APPLICATION_OCTET_STREAM, MediaType.MULTIPART_FORM_DATA, MediaType.APPLICATION_JSON})
+	public OrderDetail createOrderDetail(OrderDetail orderDetail) {
+		System.out.println("save UserCart :::"+orderDetail.getOrderDetailId());
+		if(orderDetail.getOrderDetailId()==0){
+		System.out.println("inside UserCart rest controller");
+		return orderDAOLocal.createOrderDetail(orderDetail);
+		}else{
+			return orderDAOLocal.updateOrderDetail(orderDetail);
+		}
+	}
+	
+	@DELETE
+	@Path("/{id:[0-9][0-9]*}")
+	public void delete(@PathParam("id") int id) {
+		orderDAOLocal.deleteUserOrder(id);
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<UserOrder> getAllUserOrders() {
+		System.out.println("inside UserCart rest controller get All categories");
+		 List<UserOrder> list = orderDAOLocal.getAllUserOrders();
+		return list;
+	}
+	
+	@GET
+	@Path("/{id:[0-9][0-9]*}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public UserOrder getOrderById(@PathParam("id") int id) {
+		System.out.println("inside UserCart rest controller get All categories");
+		UserOrder userOrder = orderDAOLocal.getUserOrderById(id);
+		return userOrder;
+	}
+	
+	@GET
+	@Path("/userid/{userid:[0-9][0-9]*}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<UserOrder> getOrdersByUserId(@PathParam("userid") int id) {
+		System.out.println("inside UserCart rest controller getCartSByUserId");
+		List<UserOrder> userOrderList = orderDAOLocal.getUserOrdersByUserId(id);
+		for(UserOrder userOrder: userOrderList){
+			System.out.println("\n\n\n\n getCartSByUserId");
+			System.out.println(userOrder.getOrderStatus());
+		}
+		return userOrderList;
+	}
+	
+}

@@ -1,0 +1,35 @@
+'use strict';
+  
+angular.module('app')
+.factory('artService',['$http', function ($http) {
+        var service = {};
+        service.getAllCarts = function (callback) {
+        	$http.get(appConfig.serviceURI+"cart").success(function(data){
+    			 callback(data);
+    		}).error(function(error){
+    			alert("Some Error Occurred!");
+    		});
+        };
+        
+        service.saveCart = function(cart){
+        	 return $http.post(appConfig.serviceURI+"cart",cart);
+		}
+        
+        service.deleteCategory = function(id){
+       	 return $http.delete(appConfig.serviceURI+"cart/"+id);
+		}
+        
+        service.getCartById = function(id,callback){
+        	if(id>0){
+        	 $http.get(appConfig.serviceURI+"cart"+"/"+id).success(function(data){
+        		 callback(data);
+     		}).error(function(error){
+     			alert("Some Error Occurred!");
+     		});
+        	}
+		}
+        
+       
+        return service;
+    }]);
+  

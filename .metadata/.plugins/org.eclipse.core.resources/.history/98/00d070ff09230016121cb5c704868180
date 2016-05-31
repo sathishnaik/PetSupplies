@@ -1,0 +1,5 @@
+package com.sogeti.pet.entity;
+
+public class UserOrder {
+
+}

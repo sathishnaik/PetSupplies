@@ -1,0 +1,35 @@
+<div class="container" >
+		<div class="row" >
+			<div class="col-xs-12" >
+			
+			<div class="alert alert-success" ng-show="status">
+			{{status}}
+			</div>	
+			
+	<a href="#/product" class="btn btn-small btn-success">Add Product</a>		
+<table class="table table-striped" >
+<tr>
+<th>Product ID</th>
+<th>Product Name</th>
+<th>Product Description</th>
+<th>Edit/Delete</th>
+</tr>
+   <tr ng-repeat="product in productList">
+       <td data-title="'Id'" >
+           {{product.id}}
+       </td>
+       <td data-title="'Category Name'" >
+           {{product.productName}}
+       </td>
+       <td data-title="'Category Description'" >
+           {{product.productDescription}}
+       </td>   
+       
+        <td data-title="'Edit/Delete'" >
+       <a ng-click="viewOrder(product.id)" class="btn btn-large btn-primary">Edit</a>
+       </td>     
+         
+   </tr>
+</table>
+</div></div></div>
+

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.sogeti.pet.entity.Categoy&apos; to &apos;Category&apos;&#x0D;&#x0A;- Original project: &apos;webejbmodule&apos;&#x0D;&#x0A;- Original element: &apos;com.sogeti.pet.entity.Categoy&apos;&#x0D;&#x0A;- Renamed element: &apos;com.sogeti.pet.entity.Category&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Categoy&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/ejbModule&lt;com.sogeti.pet.entity{Categoy.java[Categoy" matchStrategy="1" name="Category" qualified="false" references="true" similarDeclarations="false" stamp="1462534659067" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,10 @@
+package com.sogeti.pet.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ORDERDetail")
+public class OrderDetail {
+
+}

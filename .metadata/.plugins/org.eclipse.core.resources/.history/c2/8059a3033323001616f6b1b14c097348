@@ -1,0 +1,35 @@
+<div class="container" >
+		<div class="row" >
+			<div class="col-xs-12" >
+			
+			
+			
+<table class="table table-striped" >
+<tr>
+<th>Order ID</th>
+<th>Order Number</th>
+<th>Order Price</th>
+<th>Order Date</th>
+<th>Delivery Date</th>
+<th>Order Status</th>
+<th>View Details</th>
+</tr>
+   <tr ng-repeat="order in orderList">
+       <td data-title="'Id'" >
+           {{order.orderId}}
+       </td>
+       <td data-title="'Category Name'" >
+           {{order.productName}}
+       </td>
+       <td data-title="'Category Description'" >
+           {{product.productDescription}}
+       </td>   
+       
+        <td data-title="'Edit/Delete'" >
+       <a ng-click="viewOrder(product.id)" class="btn btn-large btn-primary">Edit</a>
+       </td>     
+         
+   </tr>
+</table>
+</div></div></div>
+

@@ -1,0 +1,144 @@
+package com.sogeti.pet.entity;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+
+
+@Entity
+@Table(name = "USERORDER")
+@NamedQueries({
+    @NamedQuery(name="UserOrder.getAll",query="SELECT o FROM UserOrder o"),
+    @NamedQuery(name="UserOrder.getAllByUserId",query="SELECT o FROM UserCart o where o.userId=:userId")
+
+})
+public class UserOrder implements Serializable{
+	
+	public UserOrder(){
+		
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3812839544124264883L;
+
+	@Id
+	@Column(name = "ORDER_ID")
+	@GeneratedValue
+	private int orderId;
+	
+	@Column(name="USER_FK_ID")
+	private int userId;
+	
+	@Column(name="ORDER_NUMBER")
+	private int orderNo;
+	
+	@Column(name="ORDER_PRICE")
+	private int orderPrice;
+	
+	@Column(name="ORDER_STATUS")
+	private String orderStatus;
+	
+	@Column(name="ORDER_DATE")
+	private Timestamp orderDate;
+	
+	@Column(name="DELIVERY_DATE")
+	private Timestamp deliveryDate;
+	
+	@OneToMany(mappedBy="order", orphanRemoval = true, fetch=FetchType.EAGER)
+	@PrimaryKeyJoinColumn ( name="CATEGORY_ID", referencedColumnName="CATEGORY_FK_ID")
+	@JsonManagedReference(value="order")
+	@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@products")
+	private Set<OrderDetail> orderdDetails;
+	
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public int getOrderPrice() {
+		return orderPrice;
+	}
+
+	public void setOrderPrice(int orderPrice) {
+		this.orderPrice = orderPrice;
+	}
+
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	public Timestamp getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Timestamp orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public Timestamp getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Timestamp deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	@Override
+    public int hashCode() {
+        return getOrderNo()+getOrderDate().hashCode();
+    }
+	
+	 @Override
+	    public boolean equals(final Object obj) {
+	        if (this == obj)
+	            return true;
+	        if (!(obj instanceof UserCart))
+	            return false;
+	        return getOrderNo() == ((UserOrder) obj).getOrderNo()&&
+	        		getUserId() == ((UserOrder) obj).getUserId()&&
+	        		getOrderDate().equals(((UserOrder) obj).getOrderDate());
+	    }
+	
+}

@@ -1,0 +1,37 @@
+(function () {
+    'use strict';
+
+    var angularApp = angular.module("app");
+	
+	angularApp.controller("productDetailController",['$scope','$routeParams','ProductService','CategoryService','CartService',
+	                       function($scope, $routeParams, ProductService, CategoryService,CartService){
+		
+		$scope.product={};
+		$scope.cart={};
+		
+		ProductService.getProductById($routeParams.id, function(product) {
+			 $scope.product = product;
+			 CategoryService.getCategoryById(product.categoryId, function(categoryresponse) {
+				 $scope.product.category = categoryresponse;
+		         });
+         });
+		
+		 
+		  
+		  $scope.addToCart = function(cart){
+			  cart.cartCreatedDate=Date.now();
+				  CartService.saveCart(cart).success(function (data) {
+					  $scope.status = 'User Cart saved successfully!';
+		                $scope.push(data);
+			            }).error(function (error) {
+			                $scope.status = 'Unable to save Cart: ' + error.message;
+			            });
+					}
+		  
+		  
+		  
+		  
+		
+		 
+	}]);
+})();

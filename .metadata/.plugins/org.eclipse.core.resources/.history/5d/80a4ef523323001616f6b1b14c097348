@@ -1,0 +1,44 @@
+<div class="container" >
+		<div class="row" >
+			<div class="col-xs-12" >
+			
+			
+			
+<table class="table table-striped" >
+<tr>
+<th>Order ID</th>
+<th>Order Number</th>
+<th>Order Price</th>
+<th>Order Date</th>
+<th>Delivery Date</th>
+<th>Order Status</th>
+<th>View Details</th>
+</tr>
+   <tr ng-repeat="order in orderList">
+       <td data-title="'Id'" >
+           {{order.orderId}}
+       </td>
+       <td data-title="'Order Number'" >
+           {{order.orderNo}}
+       </td>
+       <td data-title="'Order Price'" >
+           {{product.productDescription}}
+       </td>   
+        <td data-title="'Order Date'" >
+           {{product.productDescription}}
+       </td>   
+        <td data-title="'Delivery Date'" >
+           {{product.productDescription}}
+       </td>   
+        <td data-title="'Order Status'" >
+           {{product.productDescription}}
+       </td>   
+       
+        <td data-title="'View Details'" >
+       <a ng-click="viewOrder(order.orderId)" class="btn btn-large btn-success">View Details</a>
+       </td>     
+         
+   </tr>
+</table>
+</div></div></div>
+

@@ -1,0 +1,5 @@
+package com.sogeti.pet.rest;
+
+public class OrderEndPoint {
+
+}

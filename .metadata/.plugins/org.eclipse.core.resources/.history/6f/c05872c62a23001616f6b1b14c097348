@@ -1,0 +1,48 @@
+(function () {
+    'use strict';
+
+    var angularApp = angular.module("app");
+	
+	angularApp.controller("CartController",['$rootScope','$scope','CartService','OrderService',
+	                       function($rootScope,$scope,CartService,OrderService){
+		
+		$scope.cartList=[];
+		$scope.cartTotalPrice=0;
+		$scope.order={};
+		
+		CartService.getCartsByUserId($rootScope.userLoggedIn.userid, function(cartList) {
+			 $scope.cartList = cartList;
+			 angular.forEach($scope.cartList,function(value,index){
+				 $scope.cartTotalPrice =$scope.cartTotalPrice+value.totalPrice;
+	            })
+         });
+		
+		 
+		  
+		  $scope.placeOrder = function(cartList){
+			  $scope.order.userId=$rootScope.userLoggedIn.userid;
+			  $scope.order.orderPrice=$scope.cartTotalPrice;
+			  var currentDate = new Date();
+			  $scope.order.orderDate = Date.now();
+			  $scope.order.deliveryDate=currentDate.setDate(currentDate.getDate() + 7);
+			  $scope.order.orderStatus="ORDER_DISPATCHED";
+			  
+			  OrderService.saveOrder($scope.order).success(function (data) {
+					  $scope.status = 'User Order saved successfully!';
+					  $scope.order = data;
+					  angular.forEach(cartList,function(value,index){
+								var orderDetail={};
+								orderDetail.order=$scope.order;
+								orderDetail.product=value.product;
+								 OrderService.saveOrderDetail(orderDetail).success(function (data) {
+									 console.log(data);
+								 }).error(function (error) {
+				                $scope.status = 'Unable to save Order Detail: ' + error.message;
+				            })
+					            })
+			            }).error(function (error) {
+			                $scope.status = 'Unable to save Order: ' + error.message;
+			            });
+					}
+	}]);
+})();

@@ -1,0 +1,102 @@
+package com.sogeti.pet.rest;
+
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import com.sogeti.ejb.beans.interfaces.UserDAOLocal;
+import com.sogeti.pet.entity.Product;
+import com.sogeti.pet.entity.State;
+import com.sogeti.pet.entity.User;
+import com.sogeti.pet.entity.UserAddress;
+
+import org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap;
+
+
+@RequestScoped
+@Path("/users")
+public class UserEndPoint {
+	@EJB
+	private UserDAOLocal userDAOLocal;
+	
+	@POST
+	@Consumes({MediaType.APPLICATION_OCTET_STREAM, MediaType.MULTIPART_FORM_DATA, MediaType.APPLICATION_JSON})
+	public User save(User user) {
+		if(user.getId()==0){
+		return userDAOLocal.createUser(user);
+		}else{
+			return userDAOLocal.updateUser(user);
+		}
+	}
+
+	@GET
+	@Path("/{id:[0-9][0-9]*}")
+	@Produces("application/json")
+	public Response findById(@PathParam("id") int id) {
+		User student = userDAOLocal.getUser(id);
+		if (student == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		return Response.ok(student).build();
+	}
+	
+	@GET
+	@Path("/states")
+	@Produces("application/json")
+	public Response getStates() {
+		List<State> states = userDAOLocal.getStates();
+		if (states == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		return Response.ok(states).build();
+	}
+	
+	@GET
+	@Path("/{username:[A-Z]*[a-z]*}")
+	@Produces("application/json")
+	public Response findByUsername(@PathParam("username") String username) {
+		User user = userDAOLocal.getUserByUsername(username);
+		if (user == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		return Response.ok(user).build();
+	}
+
+	@GET
+	@Produces("application/json")
+	public List<User> listAll(
+			@QueryParam("start") final Integer startPosition,
+			@QueryParam("max") final Integer maxResult) {
+		List<User> users = userDAOLocal.getAllUsers();
+		return users;
+	}
+
+	@DELETE
+	@Path("/{id:[0-9][0-9]*}")
+	@Produces("text/plain")
+	public Response deleteById(@PathParam("id") int id) {
+		Response r = null;
+		try{
+			userDAOLocal.remove(id);
+			r = Response.ok("OK").build();
+		}
+		catch(Exception e){
+			System.out.println("exception in create "+e);
+			r = Response.ok("error").build();
+		}
+		return r;
+	}
+}

@@ -1,0 +1,31 @@
+<div class="container">
+		<div class="row" >
+			<div class="col-xs-12" >
+<a href="#/addProduct">Add Product</a>
+<a href="#/addCategory">Add Category</a>
+<a href="#/addCategory">User Logged In {{userLoggedIn.username}}{{users}}</a>
+
+<table  class="table table-striped">
+   <tr ng-repeat="user in users">
+       <td data-title="'Id'" >
+           {{user.id}}
+       </td>
+       <td data-title="'First Name'" >
+           {{user.first_name}}
+       </td>
+       <td data-title="'Last Name'" >
+           {{user.last_name}}
+       </td>    
+       <td data-title="'e-mail'" >
+           {{user.email}}
+       </td>    
+       <td data-title="'Country'">
+           {{user.country}}
+       </td>    
+       <td data-title="'IP'" >
+           {{user.ip_address}}
+       </td>    
+   </tr>
+</table>
+</div></div></div>
+

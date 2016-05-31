@@ -1,0 +1,21 @@
+package com.sogeti.ejb.beans;
+
+import com.sogeti.ejb.beans.interfaces.OrderDAOLocal;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+/**
+ * Session Bean implementation class OrderDAO
+ */
+@Stateless
+@LocalBean
+public class OrderDAO implements OrderDAOLocal {
+
+    /**
+     * Default constructor. 
+     */
+    public OrderDAO() {
+        // TODO Auto-generated constructor stub
+    }
+
+}

@@ -1,0 +1,20 @@
+(function () {
+    'use strict';
+
+    var angularApp = angular.module("app");
+	
+	angularApp.controller("orderDetailController",[ '$scope','$routeParams','OrderService',
+	                       function( $scope, $routeParams, OrderService){
+		
+		$scope.product={};
+		$scope.cart={};
+		
+		ProductService.getProductById($routeParams.id, function(product) {
+			 $scope.product = product;
+			 CategoryService.getCategoryById(product.categoryId, function(categoryresponse) {
+				 $scope.product.category = categoryresponse;
+		         });
+         });
+		
+	}]);
+})();

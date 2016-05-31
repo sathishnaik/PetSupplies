@@ -1,0 +1,51 @@
+<div class="container" >
+		<div class="row" >
+			<div class="col-xs-12" >
+			
+		
+		
+		<div class="row">
+ <p><input type="text" placeholder="Search Category" ng-model="productName" /></p>
+  <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="x in productList | orderBy : 'productName'|filter:productName">
+    <a ng-click="editCategory(x.id)" class="btn" class="thumbnail">
+      <img src="resources/images/{{x.categoryImagePath}}"" alt="...">
+      <div class="caption">
+        <h4>{{x.categoryName}}</h4>
+        <p>{{x.categoryDescription}}</p>
+        </div>
+    </a>
+  </div>
+  
+</div>
+			
+	<a href="#/product" class="btn btn-small btn-success">Add Product</a>		
+<table class="table table-striped" >
+<tr>
+<th>Product ID</th>
+<th>Product Name</th>
+<th>Product Description</th>
+<th>Edit/Delete</th>
+</tr>
+   <tr ng-repeat="product in productList">
+       <td data-title="'Id'" >
+           {{product.id}}
+       </td>
+       <td data-title="'Category Name'" >
+           {{product.productName}}
+       </td>
+       <td data-title="'Category Description'" >
+           {{product.productDescription}}
+       </td>   
+       
+        <td data-title="'Edit/Delete'" >
+       <a ng-click="editProduct(product.id)" class="btn btn-large btn-primary">Edit</a>
+        <button type="button" class="btn btn-small btn-danger"  data-ng-click="openModal(product.id)" >
+  Delete 
+</button> 
+       </td>     
+         
+   </tr>
+</table>
+</div></div></div>
+
+

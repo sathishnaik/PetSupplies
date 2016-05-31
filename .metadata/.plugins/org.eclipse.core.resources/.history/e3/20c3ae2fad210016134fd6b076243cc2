@@ -1,0 +1,80 @@
+<div class="container" >
+		<div class="row" >
+			<div class="col-xs-12" >
+		
+<form role="form" novalidate name="productForm" ng-submit="saveProduct(product)" class="form-horizontal">
+						<input type="hidden" name="id" ng-model="id"/>
+						<div class="form-group" >
+							<label class="col-sm-4 control-label">Category Name:</label>
+							<div class="col-sm-6">
+							 <select ng-options="category.id as category.categoryName for category in categoryList" ng-model="product.categoryId"
+							 ng-change ="category_changed(product.categoryId)" ng-if="product.id>0">
+							 <!-- <option value="">---Please select---</option>
+						      <option ng-repeat="x in categoryList" value="{{x.id}}" >{{x.id}}</option> -->
+						    </select>
+						    
+						    <select ng-model="product.categoryId" ng-change ="category_changed(product.categoryId)" ng-if="product.id==undefined">
+							 <option value="">---Please select---</option>
+						      <option ng-repeat="x in categoryList" value="{{x.id}}" >{{x.categoryName}}</option>
+						    </select>
+						    </div>
+						</div>
+						
+						<div class="form-group" >
+							<label class="col-sm-4 control-label" >Product Name:</label>
+							<div class="col-sm-6">
+							<input type="text" name="productName" data-ng-model="product.productName"  required/>
+							</div> 
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Product Description: </label>
+							<div class="col-sm-6">
+							<input type="text" name="productDescription" data-ng-model="product.productDescription"  required/>
+							</div> 
+						</div>
+						<div class="form-group" ng-if="product.id==undefined" >
+							<label class="col-sm-4 control-label">Product Image: </label>
+							<div class="col-sm-6">
+						<input onchange="angular.element(this).scope().file_changed(this)" type="file" accept="image/*" />
+						</div>
+             		 </div>
+             		 
+             		 <div class="form-group" ng-if="product.id>0">
+							<label class="col-sm-4 control-label">Change Product Image: </label>
+							<div class="col-sm-6">
+						<input onchange="angular.element(this).scope().file_changed(this)" type="file" accept="image/*"  />
+						<img alt="" src="resources/images/{{product.productImagePath}}" height="100" width="100" >
+						</div>
+             		 </div>
+             		 
+             		<div class="form-group">
+							<label class="col-sm-4 control-label" >Product Price: </label>
+							<div class="col-sm-6">
+							<input type="text" name="productPrice" data-ng-model="product.productPrice"  required/>
+							</div> 
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Product Status: </label>
+							<div class="col-sm-6">
+							<select name="singleSelect" id="singleSelect" ng-model="product.productStatus">
+						      <option value="">---Please select---</option> <!-- not selected / blank option -->
+						      <option value="IN STOCK">IN STOCK</option> <!-- interpolation -->
+						      <option value="OUT OF STOCK">OUT OF STOCK</option>
+						    </select></div>
+						</div>
+						
+						 <div class="help-block" ng-messages="productForm.productName.$error" ng-show="productForm.productName.$touched||product.productDescription.$touched
+						 ||product.productPrice.$touched" >
+    						<div class="help-block" ng-messages-include="resources/messages.html"></div>
+						</div>
+						
+						<div class="form-group" ng-if="product.id==undefined">
+							<button class="btn btn-primary" ng-disabled="productForm.$invalid" >Add Product</button>
+						</div>
+						<div class="form-group" ng-if="product.id>0">
+							<button class="btn btn-primary"  ng-disabled="productForm.$invalid" >Edit Product</button>
+						</div>
+						</form>
+
+</div></div></div>
