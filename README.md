@@ -10,10 +10,10 @@ EJB for middle tier,
 Hibernate/JPA for ORM,
 Maven as build automation tool.
 
-webejbmodule contains EJB session beans to interact with database via JPA. This API will be middle tier for both webmodule and webusermodule
+webejbmodule contains EJB session beans to interact with database via JPA. This API will be middle tier for both webmodule and webshopusermodule
 
 webmodule is an admin module.
-webusermodule is an user module.
+webshopusermodule is an user module.
 
 
 
